@@ -1,0 +1,27 @@
+/* Reduce object page header top margin/padding */
+.sapUxAPObjectPageWrapper .sapUxAPObjectPageHeaderContent,
+.sapUxAPObjectPageWrapper .sapUxAPObjectPageHeaderTitle,
+.sapUxAPObjectPageHeaderTitleSeparatorContainer {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+.sapUxAPObjectPageHeaderContentImageContainer,
+.sapUxAPObjectPageHeaderPlaceholder {
+    display: none !important;
+}
+
+.sapFDynamicPageTitle {
+    padding-top: 0.5rem !important;
+}
+
+.sapFDynamicPageTitleWrapper {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Remove any spacer before header */
+.sapUxAPObjectPageLayout > .sapUiHidden,
+.sapFDynamicPage > .sapUiSpacer {
+    display: none !important;
+}

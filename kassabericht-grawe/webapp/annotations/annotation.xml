@@ -1,0 +1,70 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata4/sap/zui_rap_kb_monitor_o4/srvd/sap/zui_rap_kb_monitor/0001/$metadata">
+        <edmx:Include Namespace="com.sap.gateway.srvd.zui_rap_kb_monitor.v0001" Alias="SAP__self"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local">
+            <Annotations Target="SAP__self.ZC_KB_MONITORType">
+                <Annotation Term="UI.DataPoint" Qualifier="TotalRevenue">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="TotalRevenue"/>
+                        <PropertyValue Property="Title" String="Gesamt Einnahmen"/>
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.DataPoint" Qualifier="TotalExpenses">
+                    <Record Type="UI.DataPointType">
+                        <PropertyValue Property="Value" Path="TotalExpenses"/>
+                        <PropertyValue Property="Title" String="Gesamt Ausgaben"/>
+                        <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="HeaderAdminData">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedBy"/>
+                                    <PropertyValue Property="Label" String="Angelegt von"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="CreatedAt"/>
+                                    <PropertyValue Property="Label" String="Angelegt am"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedBy"/>
+                                    <PropertyValue Property="Label" String="Geändert von"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="LastChangedAt"/>
+                                    <PropertyValue Property="Label" String="Geändert am"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderFacets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="HeaderInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Saldo"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="ID" String="HeaderAdminData"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#HeaderAdminData"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
