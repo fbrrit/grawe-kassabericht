@@ -8,6 +8,9 @@
     <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Communication.xml">
         <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
     </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Core.xml">
+        <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core"/>
+    </edmx:Reference>
     <edmx:Reference Uri="/sap/opu/odata4/sap/zui_rap_kb_monitor_o4/srvd/sap/zui_rap_kb_monitor/0001/$metadata">
         <edmx:Include Namespace="com.sap.gateway.srvd.zui_rap_kb_monitor.v0001" Alias="SAP__self"/>
     </edmx:Reference>
@@ -17,14 +20,14 @@
                 <Annotation Term="UI.DataPoint" Qualifier="TotalRevenue">
                     <Record Type="UI.DataPointType">
                         <PropertyValue Property="Value" Path="TotalRevenue"/>
-                        <PropertyValue Property="Title" String="Gesamt Einnahmen"/>
+                        <PropertyValue Property="Title" String="Summe Einnahmen"/>
                         <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
                     </Record>
                 </Annotation>
                 <Annotation Term="UI.DataPoint" Qualifier="TotalExpenses">
                     <Record Type="UI.DataPointType">
                         <PropertyValue Property="Value" Path="TotalExpenses"/>
-                        <PropertyValue Property="Title" String="Gesamt Ausgaben"/>
+                        <PropertyValue Property="Title" String="Summe Ausgaben"/>
                         <PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
                     </Record>
                 </Annotation>
@@ -64,6 +67,206 @@
                         </Record>
                     </Collection>
                 </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_MONITORType">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Allgemeine Informationen"/>
+                            <PropertyValue Property="ID" String="GeneralInfo"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Stammdaten"/>
+                                        <PropertyValue Property="ID" String="BasicData"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Label" String="Kassenbestände"/>
+                                        <PropertyValue Property="ID" String="KassenBestaende"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#KassenBestaende"/>
+                                    </Record>
+                                    <Record Type="UI.CollectionFacet">
+                                        <PropertyValue Property="Label" String="Bargeld Details"/>
+                                        <PropertyValue Property="ID" String="CashDetails"/>
+                                        <PropertyValue Property="Facets">
+                                            <Collection>
+                                                <Record Type="UI.ReferenceFacet">
+                                                    <PropertyValue Property="Label" String="Banknoten"/>
+                                                    <PropertyValue Property="ID" String="Banknotes"/>
+                                                    <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Banknotes"/>
+                                                </Record>
+                                                <Record Type="UI.ReferenceFacet">
+                                                    <PropertyValue Property="Label" String="Münzen"/>
+                                                    <PropertyValue Property="ID" String="Coins"/>
+                                                    <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Coins"/>
+                                                </Record>
+                                            </Collection>
+                                        </PropertyValue>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Einnahmen"/>
+                            <PropertyValue Property="ID" String="RevenueSection"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="RevenueDataPoint"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TotalRevenue"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="Revenue"/>
+                                        <PropertyValue Property="Target" AnnotationPath="_Revenue/@UI.LineItem"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Ausgaben"/>
+                            <PropertyValue Property="ID" String="ExpensesSection"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="ExpensesDataPoint"/>
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#TotalExpenses"/>
+                                    </Record>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="ID" String="Expenses"/>
+                                        <PropertyValue Property="Target" AnnotationPath="_Expenses/@UI.LineItem"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Anhänge"/>
+                            <PropertyValue Property="ID" String="Attachments"/>
+                            <PropertyValue Property="Target" AnnotationPath="_Attachments/@UI.LineItem"/>
+                        </Record>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Verwaltungsdaten"/>
+                            <PropertyValue Property="ID" String="AdminData"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#AdminData"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_MONITORType/CreatedBy">
+                <Annotation Term="Common.Label" String="Angelegt von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_MONITORType/CreatedAt">
+                <Annotation Term="Common.Label" String="Angelegt am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_MONITORType/LastChangedBy">
+                <Annotation Term="Common.Label" String="Geändert von"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_MONITORType/LastChangedAt">
+                <Annotation Term="Common.Label" String="Geändert am"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Attachment"/>
+                            <PropertyValue Property="Label" String="Datei"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Filename"/>
+                            <PropertyValue Property="Label" String="Dateiname"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Mimetype"/>
+                            <PropertyValue Property="Label" String="Dateityp"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Filesize"/>
+                            <PropertyValue Property="Label" String="Dateigröße"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedBy"/>
+                            <PropertyValue Property="Label" String="Hochgeladen von"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="CreatedAt"/>
+                            <PropertyValue Property="Label" String="Hochgeladen am"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Attachment"/>
+                            <PropertyValue Property="Label" String="Datei auswählen"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Filename"/>
+                            <PropertyValue Property="Label" String="Dateiname"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Mimetype"/>
+                            <PropertyValue Property="Label" String="Dateityp"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Filesize"/>
+                            <PropertyValue Property="Label" String="Dateigröße"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Label" String="Anhang Details"/>
+                            <PropertyValue Property="ID" String="AttachmentInfo"/>
+                            <PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="TypeName" String="Anhang"/>
+                        <PropertyValue Property="TypeNamePlural" String="Anhänge"/>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="Filename"/>
+                            </Record>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Attachment">
+                <Annotation Term="UI.IsImageURL" Bool="false"/>
+                <Annotation Term="Core.MediaType" Path="Mimetype"/>
+                <Annotation Term="Core.ContentDisposition">
+                    <Record Type="Core.ContentDispositionType">
+                        <PropertyValue Property="Filename" Path="Filename"/>
+                        <PropertyValue Property="Type" String="inline"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Core.AcceptableMediaTypes">
+                    <Collection>
+                        <String>application/pdf</String>
+                        <String>image/jpeg</String>
+                        <String>image/png</String>
+                        <String>application/vnd.openxmlformats-officedocument.wordprocessingml.document</String>
+                        <String>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</String>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Guid">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Kassaguid">
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Filename">
+                <Annotation Term="Common.Label" String="Dateiname"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Mimetype">
+                <Annotation Term="Common.Label" String="MIME-Typ"/>
+            </Annotations>
+            <Annotations Target="SAP__self.ZC_KB_ATTType/Filesize">
+                <Annotation Term="Common.Label" String="Dateigröße"/>
             </Annotations>
         </Schema>
     </edmx:DataServices>

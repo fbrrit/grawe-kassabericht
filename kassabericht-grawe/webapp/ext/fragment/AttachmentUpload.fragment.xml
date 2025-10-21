@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:u="sap.ui.unified" xmlns:form="sap.ui.layout.form">
+    <Dialog id="attachmentDialog" title="Anhang hochladen" contentWidth="500px">
+        <form:SimpleForm id="attachmentForm" editable="true" layout="ResponsiveGridLayout">
+            <form:content>
+                <Label id="fileSelectLabel" text="Datei auswählen" required="true"/>
+                <u:FileUploader
+                    id="fileUploader"
+                    name="attachmentFile"
+                    placeholder="PDF-Datei auswählen..."
+                    fileType="pdf"
+                    mimeType="application/pdf"
+                    buttonText="Durchsuchen"
+                    uploadOnChange="false"
+                    width="100%"
+                    change=".onFileChange"/>
+                <Label id="fileNameLabel" text="Dateiname"/>
+                <Text id="fileNameText" text=""/>
+                <Label id="fileTypeLabel" text="Dateityp"/>
+                <Text id="fileTypeText" text=""/>
+                <Label id="fileSizeLabel" text="Dateigröße"/>
+                <Text id="fileSizeText" text=""/>
+            </form:content>
+        </form:SimpleForm>
+        <beginButton>
+            <Button id="uploadButton" text="Hochladen" press=".onUploadAttachment" type="Emphasized"/>
+        </beginButton>
+        <endButton>
+            <Button id="cancelButton" text="Abbrechen" press=".onCancelUpload"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

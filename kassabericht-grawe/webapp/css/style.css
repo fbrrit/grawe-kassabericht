@@ -1,27 +1,25 @@
-/* Reduce object page header top margin/padding */
-.sapUxAPObjectPageWrapper .sapUxAPObjectPageHeaderContent,
-.sapUxAPObjectPageWrapper .sapUxAPObjectPageHeaderTitle,
-.sapUxAPObjectPageHeaderTitleSeparatorContainer {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+/* GRAWE brand green styling for section headers */
+.sapUxAPObjectPageSubSectionHeaderTitle,
+.sapUxAPObjectPageSectionTitle {
+    color: #006341 !important;
+    font-weight: 600 !important;
 }
 
-.sapUxAPObjectPageHeaderContentImageContainer,
-.sapUxAPObjectPageHeaderPlaceholder {
-    display: none !important;
+/* Green underline for sections */
+.sapUxAPObjectPageSectionHeader {
+    border-bottom: 2px solid #006341 !important;
 }
 
-.sapFDynamicPageTitle {
-    padding-top: 0.5rem !important;
+/* Tab styling in green */
+.sapUxAPAnchorBarScrollContainer .sapMITBText {
+    color: #006341 !important;
 }
 
-.sapFDynamicPageTitleWrapper {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+.sapUxAPAnchorBarScrollContainer .sapMITBSelected .sapMITBText {
+    color: #006341 !important;
+    font-weight: bold !important;
 }
 
-/* Remove any spacer before header */
-.sapUxAPObjectPageLayout > .sapUiHidden,
-.sapFDynamicPage > .sapUiSpacer {
-    display: none !important;
+.sapUxAPAnchorBarScrollContainer .sapMITBSelected {
+    border-bottom: 3px solid #006341 !important;
 }
