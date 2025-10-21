@@ -11,20 +11,16 @@ sap.ui.define([
         _selectedFile: null,
         _oAttachmentDialog: null,
 
-        // Override the editFlow to intercept Create button for attachments
         override: {
             editFlow: {
                 onBeforeCreate: function(oEvent, mParameters) {
-                    // Check if this is for the attachments table
                     if (mParameters && mParameters.contextPath &&
                         mParameters.contextPath.indexOf("_Attachments") > -1) {
 
                         console.log("=== Create button clicked for attachments ===");
 
-                        // Open our custom upload dialog
                         this.openUploadDialog();
 
-                        // Return a promise that we'll resolve after upload
                         return new Promise(function(resolve, reject) {
                             // Store the resolve/reject for later use
                             this._createPromiseResolve = resolve;
@@ -35,7 +31,6 @@ sap.ui.define([
             }
         },
 
-        // Opens the PDF upload dialog
         openUploadDialog: function() {
             console.log("=== onUploadFile called ===");
 
@@ -63,12 +58,10 @@ sap.ui.define([
         onFileChange: function(oEvent) {
             console.log("=== onFileChange called ===");
 
-            // Get the FileUploader control and access the file
             const oFileUploader = oEvent.getSource();
             const file = oFileUploader.oFileUpload.files[0];
 
             if (file) {
-                // Validate that it's a PDF file
                 if (!file.name.toLowerCase().endsWith('.pdf')) {
                     MessageToast.show("Bitte wählen Sie eine PDF-Datei aus");
                     oFileUploader.clear();
@@ -76,7 +69,6 @@ sap.ui.define([
                     return;
                 }
 
-                // Validate MIME type
                 if (file.type !== 'application/pdf') {
                     MessageToast.show("Ungültiger Dateityp. Erwartet: PDF");
                     oFileUploader.clear();
@@ -84,8 +76,7 @@ sap.ui.define([
                     return;
                 }
 
-                // Validate file size (max 10MB)
-                const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+                const maxSize = 10 * 1024 * 1024;
                 if (file.size > maxSize) {
                     MessageToast.show("Dateigröße darf 10MB nicht überschreiten");
                     oFileUploader.clear();
@@ -98,7 +89,6 @@ sap.ui.define([
                 console.log("PDF selected:", file.name, "Size:", sizeMB, "MB");
                 MessageToast.show("PDF ausgewählt: " + file.name + " (" + sizeMB + " MB)");
 
-                // Update file info display
                 const oFileNameText = Fragment.byId("attachmentUploadDialog", "fileNameText");
                 const oFileTypeText = Fragment.byId("attachmentUploadDialog", "fileTypeText");
                 const oFileSizeText = Fragment.byId("attachmentUploadDialog", "fileSizeText");
@@ -112,7 +102,6 @@ sap.ui.define([
         onUploadAttachment: function() {
             console.log("=== onUploadAttachment called ===");
 
-            // Validation - Check if file is selected
             if (!this._selectedFile) {
                 MessageBox.warning("Bitte wählen Sie eine PDF-Datei aus.");
                 return;
@@ -120,20 +109,17 @@ sap.ui.define([
 
             const file = this._selectedFile;
 
-            // Validate file extension
             if (!file.name.toLowerCase().endsWith('.pdf')) {
                 MessageToast.show("Bitte wählen Sie eine PDF-Datei aus");
                 return;
             }
 
-            // Validate MIME type
             if (file.type !== 'application/pdf') {
                 MessageToast.show("Ungültiger Dateityp. Erwartet: PDF");
                 return;
             }
 
-            // Validate file size (max 10MB)
-            const maxSize = 10 * 1024 * 1024; // 10MB
+            const maxSize = 10 * 1024 * 1024; 
             if (file.size > maxSize) {
                 MessageToast.show("Dateigröße darf 10MB nicht überschreiten");
                 return;
@@ -141,25 +127,20 @@ sap.ui.define([
 
             const oModel = this.base.getView().getModel();
 
-            // Show loading indicator
             sap.ui.core.BusyIndicator.show();
 
-            // Read file as base64
             const reader = new FileReader();
 
             reader.onload = function(e) {
                 try {
-                    // Extract base64 content (remove data URL prefix)
                     const base64Content = e.target.result.split(',')[1];
                     console.log("PDF file read successfully");
                     console.log("File name:", file.name);
                     console.log("File size:", file.size, "bytes");
 
-                    // Get parent context (the Kassabericht entity)
                     const oParentContext = this.base.getView().getBindingContext();
                     console.log("Parent context:", oParentContext.getPath());
 
-                    // Create new attachment
                     console.log("=== Creating new attachment ===");
                     const oListBinding = oModel.bindList("/ZC_KB_ATT", oParentContext);
                     const oNewContext = oListBinding.create({
@@ -176,7 +157,6 @@ sap.ui.define([
                             console.log("=== PDF attachment created successfully ===");
                             MessageToast.show("PDF erfolgreich hochgeladen: " + file.name);
 
-                            // Resolve the create promise if it exists
                             if (this._createPromiseResolve) {
                                 this._createPromiseResolve();
                                 this._createPromiseResolve = null;
@@ -193,7 +173,6 @@ sap.ui.define([
                                 details: oError.message || oError.toString()
                             });
 
-                            // Reject the create promise if it exists
                             if (this._createPromiseReject) {
                                 this._createPromiseReject(oError);
                                 this._createPromiseResolve = null;
@@ -208,7 +187,6 @@ sap.ui.define([
                         details: error.toString()
                     });
 
-                    // Reject the create promise if it exists
                     if (this._createPromiseReject) {
                         this._createPromiseReject(error);
                         this._createPromiseResolve = null;
@@ -222,7 +200,6 @@ sap.ui.define([
                 MessageToast.show("Fehler beim Lesen der Datei");
                 console.error("FileReader error");
 
-                // Reject the create promise if it exists
                 if (this._createPromiseReject) {
                     this._createPromiseReject(new Error("File read error"));
                     this._createPromiseResolve = null;
@@ -230,17 +207,14 @@ sap.ui.define([
                 }
             }.bind(this);
 
-            // Start reading the file as Data URL (base64)
             reader.readAsDataURL(file);
         },
 
         _cleanup: function() {
             console.log("=== Cleaning up and closing dialog ===");
 
-            // Reset selected file
             this._selectedFile = null;
 
-            // Clear file uploader and info fields
             const oFileUploader = Fragment.byId("attachmentUploadDialog", "fileUploader");
             const oFileNameText = Fragment.byId("attachmentUploadDialog", "fileNameText");
             const oFileTypeText = Fragment.byId("attachmentUploadDialog", "fileTypeText");
@@ -251,7 +225,6 @@ sap.ui.define([
             if (oFileTypeText) oFileTypeText.setText("");
             if (oFileSizeText) oFileSizeText.setText("");
 
-            // Close dialog
             if (this._oAttachmentDialog) {
                 this._oAttachmentDialog.close();
             }
@@ -260,7 +233,6 @@ sap.ui.define([
         onCancelUpload: function() {
             console.log("=== onCancelUpload called ===");
 
-            // Reject the create promise if it exists
             if (this._createPromiseReject) {
                 this._createPromiseReject(new Error("Upload cancelled"));
                 this._createPromiseResolve = null;
