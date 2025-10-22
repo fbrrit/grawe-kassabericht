@@ -146,7 +146,12 @@
                 "_Attachments/@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable",
-                    "enableExport": true
+                    "enableExport": true,
+                    "personalization": {
+                      "column": false,
+                      "sort": false,
+                      "filter": false
+                    }
                   },
                   "actions": {
                     "PreviewAttachment": {
@@ -155,6 +160,14 @@
                       "enabled": true,
                       "requiresSelection": true,
                       "text": "Vorschau"
+                    }
+                  },
+                  "columns": {
+                    "DataField::Attachment": {
+                      "width": "5rem"
+                    },
+                    "DataField::Filename": {
+                      "width": "auto"
                     }
                   }
                 }

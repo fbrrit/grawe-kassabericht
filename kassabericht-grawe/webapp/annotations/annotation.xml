@@ -170,26 +170,27 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Attachment"/>
                             <PropertyValue Property="Label" String="Datei"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Filename"/>
                             <PropertyValue Property="Label" String="Dateiname"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="Mimetype"/>
                             <PropertyValue Property="Label" String="Dateityp"/>
-                        </Record>
-                        <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="Filesize"/>
-                            <PropertyValue Property="Label" String="Dateigröße"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CreatedBy"/>
                             <PropertyValue Property="Label" String="Hochgeladen von"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
                         </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="CreatedAt"/>
                             <PropertyValue Property="Label" String="Hochgeladen am"/>
+                            <Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Low"/>
                         </Record>
                     </Collection>
                 </Annotation>

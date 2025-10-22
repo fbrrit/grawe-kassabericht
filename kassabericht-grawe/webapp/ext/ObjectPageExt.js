@@ -142,13 +142,21 @@ sap.ui.define([
                     console.log("Parent context:", oParentContext.getPath());
 
                     console.log("=== Creating new attachment ===");
+                    console.log("File size to send:", file.size, "Type:", typeof file.size);
+
                     const oListBinding = oModel.bindList("/ZC_KB_ATT", oParentContext);
                     const oNewContext = oListBinding.create({
                         Kassaguid: oParentContext.getProperty("Guid"),
                         Filename: file.name,
                         Mimetype: file.type,
-                        Filesize: file.size,
+                        Filesize: parseInt(file.size, 10),
                         Attachment: base64Content
+                    });
+
+                    console.log("Context data:", {
+                        Filename: file.name,
+                        Filesize: parseInt(file.size, 10),
+                        Mimetype: file.type
                     });
 
                     oNewContext.created()

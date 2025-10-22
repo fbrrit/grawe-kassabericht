@@ -1,22 +1,20 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
     <Dialog
         id="attachmentPreviewDialog"
-        title="PDF Vorschau"
-        contentWidth="95%"
-        contentHeight="95%"
+        contentWidth="98%"
+        contentHeight="98%"
         resizable="true"
-        draggable="true">
+        draggable="true"
+        stretch="true">
+        <customHeader>
+            <Toolbar>
+                <Title id="previewFileName" text=""/>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://decline" press=".onClosePreview" tooltip="Schließen"/>
+            </Toolbar>
+        </customHeader>
         <content>
-            <VBox width="100%" height="100%">
-                <HBox width="100%" justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
-                    <Text id="previewFileName" text="" class="sapUiSmallMarginBegin"/>
-                    <Text id="previewFileSize" text="" class="sapUiSmallMarginEnd"/>
-                </HBox>
-                <core:HTML id="pdfViewer" content="" preferDOM="false" class="sapUiNoMargin"/>
-            </VBox>
+            <core:HTML id="pdfViewer" content="" preferDOM="false"/>
         </content>
-        <endButton>
-            <Button id="closePreviewButton" text="Schließen" press=".onClosePreview"/>
-        </endButton>
     </Dialog>
 </core:FragmentDefinition>

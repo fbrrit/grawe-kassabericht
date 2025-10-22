@@ -29,7 +29,7 @@ sap.ui.define([
             const updateDialog = function() {
                 const oFileNameText = Fragment.byId("attachmentPreviewDialog", "previewFileName");
                 const oPdfViewer = Fragment.byId("attachmentPreviewDialog", "pdfViewer");
-                const pdfHtml = '<iframe src="' + sAttachmentUrl + '" width="100%" height="100%" style="border: none; min-height: 70vh;"></iframe>';
+                const pdfHtml = '<iframe src="' + sAttachmentUrl + '" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>';
 
                 if (oFileNameText) oFileNameText.setText(sFilename);
                 if (oPdfViewer) oPdfViewer.setContent(pdfHtml);
