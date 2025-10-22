@@ -145,7 +145,17 @@
               "controlConfiguration": {
                 "_Attachments/@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
-                    "type": "ResponsiveTable"
+                    "type": "ResponsiveTable",
+                    "enableExport": true
+                  },
+                  "actions": {
+                    "PreviewAttachment": {
+                      "press": "kassabericht.kassaberichtgrawe.ext.PreviewHandler.onPreviewAttachment",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": true,
+                      "text": "Vorschau"
+                    }
                   }
                 }
               }
